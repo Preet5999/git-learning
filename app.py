@@ -1,3 +1,1 @@
-print('Hello Git')
-print('Learning Git')
-print('Sales pipeline')
+print("Hello from GitHub - Version 2")
