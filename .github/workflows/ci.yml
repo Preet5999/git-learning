@@ -13,5 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Run test
-        run: echo "CI is working!"
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Run tests
+        run: python -m pytest
