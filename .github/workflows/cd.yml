@@ -1,0 +1,33 @@
+
+name: CD - Deployment Simulation
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy-simulation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout approved code
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Verify project
+        run: python -m pytest -v
+
+      - name: Simulate deployment
+        run: |
+          mkdir -p release
+          tar --exclude='.git' --exclude='release' \
+            -czf release/pipeline-release.tar.gz .
+          echo "Deployment simulation completed."
+          ls -lh release/pipeline-release.tar.gz
